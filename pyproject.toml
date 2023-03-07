@@ -20,6 +20,9 @@ djangorestframework = "^3.14.0"
 markdown = "^3.4.1"
 
 
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
