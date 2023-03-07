@@ -39,16 +39,15 @@ class BaseConfigurationMixin:
 
     INSTALLED_APPS = values.ListValue(
         [
-            "turbo",
             "core",
-            "panel",
+            "songs",
             "django.contrib.admin",
             "django.contrib.auth",
             "django.contrib.contenttypes",
             "django.contrib.sessions",
             "django.contrib.messages",
             "django.contrib.staticfiles",
-            "channels",
+            "rest_framework",
         ]
     )
 
@@ -87,3 +86,9 @@ class BaseConfigurationMixin:
         {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
         {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
     ]
+
+    REST_FRAMEWORK = {
+        'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        ]
+    }
