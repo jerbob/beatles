@@ -7,6 +7,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+django = "^4.1.7"
+django-cache-url = "^3.4.4"
+dj-database-url = "^1.2.0"
+django-environ = "^0.10.0"
+django-cachalot = "^2.5.2"
+gunicorn = "^20.1.0"
+uvicorn = "^0.20.0"
+django-configurations = "^2.4"
 
 
 [build-system]
