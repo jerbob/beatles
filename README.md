@@ -28,4 +28,6 @@ poetry run uvicorn --app-dir=src core.asgi:application
 
 The browsable API will now be available in any web browser at http://localhost:8000/songs/. To view the songs individually, click on any `url` field's hyperlink to open the endpoint for that song, and go to `/lyrics` to view the relevant lyrics if they are stored on disk.
 
-By default, songs will only show the fields `name`, `rank`, `album` and `writers` for unauthenticated users, but all fields will be visible once the user logs in at http://localhost:8000/auth/login/?next=/songs/ with the credentials mentioned (`evident:dev_interview`).
+By default, songs will only show the fields `name`, `rank`, `album` and `writers` for unauthenticated users, but all fields will be visible once the user logs in at http://localhost:8000/auth/login/?next=/songs/ with the credentials mentioned (`evident:dev_interview`). You can also authenticate using Basic Authentication if not using the browsable API:
+
+[![asciicast](https://asciinema.org/a/7WsoWu5JoLk2nz3BiYghRSy3Y.svg)](https://asciinema.org/a/7WsoWu5JoLk2nz3BiYghRSy3Y)
