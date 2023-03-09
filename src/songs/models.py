@@ -1,5 +1,4 @@
 import re
-from pathlib import Path
 from typing import Optional
 
 from django.conf import settings
