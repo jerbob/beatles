@@ -1,4 +1,10 @@
+import re
+from pathlib import Path
+from typing import Optional
+
+from django.conf import settings
 from django.db import models
+from django.utils.functional import cached_property
 
 
 class Song(models.Model):
@@ -18,7 +24,7 @@ class Song(models.Model):
         verbose_name="Song Writer",
         help_text="For multiple writers, place each on a new line.",
     )
-    singer = models.CharField(max_length=255, blank=False, null=False)
+    singer = models.TextField(blank=False, null=False)
     release_year = models.IntegerField(
         blank=False,
         null=False,
@@ -50,11 +56,24 @@ class Song(models.Model):
         blank=False,
         null=False,
         default=0,
-        verbose_name="UG Views",
+        verbose_name="Ultimate Guitar Views",
     )
     ug_favourites = models.IntegerField(
         blank=False,
         null=False,
         default=0,
-        verbose_name="UG Favourites",
+        verbose_name="Ultimate Guitar Favourites",
     )
+
+    @cached_property
+    def slug(self) -> str:
+        """Generate a slug used to find the lyrics for this song."""
+        return "-".join(re.sub("[^a-z ]", "", self.name.lower()).split(" "))
+
+    @cached_property
+    def lyrics(self) -> Optional[str]:
+        """Read the lyrics file for this song and return the contents."""
+        file = (settings.BASE_DIR / f"../data/beatles_lyrics/{self.slug}.txt").resolve()
+        if file.exists():
+            return file.resolve().read_text()
+        return None
