@@ -3,7 +3,6 @@
 import csv
 import time
 from pathlib import Path
-from typing import Final
 
 from django.core.management.base import BaseCommand, CommandError, CommandParser
 
@@ -27,23 +26,24 @@ class Command(BaseCommand):
             raise CommandError("CSV file does not exist!")
 
         with csv_file.open(newline="") as file:
-            reader = csv.reader(
+            reader = csv.DictReader(
                 file, delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL
             )
-            next(reader)
             for row in reader:
-                duration = time.strptime(row[6], "%M:%S")
+                duration = time.strptime(row["Song Time"], "%M:%S")
                 Song.objects.get_or_create(
-                    name=row[0],
-                    rank=row[1],
-                    album=row[2],
-                    writers=row[3],
-                    singer=row[4],
-                    release_year=row[5],
+                    name=row["Song Name"],
+                    rank=row["Rank"],
+                    album=row["Album"],
+                    writers=row["Song Writer"],
+                    singer=row["Singer"],
+                    release_year=row["Year Released"],
                     song_time=duration.tm_min * 60 + duration.tm_sec,
-                    spotify_streams=row[7].replace(",", ""),
-                    rolling_stone_rank=row[8],
-                    nme_rank=row[9] or None,
-                    ug_views=row[10],
-                    ug_favourites=row[11],
+                    spotify_streams=row["Spotify Streams"].replace(",", ""),
+                    rolling_stone_rank=row[
+                        "Rolling Stone 100 Greatest Beatles Songs Ranking"
+                    ],
+                    nme_rank=row["NME Top 50 Beatles Songs Ranking"] or None,
+                    ug_views=row["UG Views"],
+                    ug_favourites=row["UG Favourites"],
                 )
