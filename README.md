@@ -20,7 +20,7 @@ poetry run src/manage.py createsuperuser --no-input
 
 And to run the server locally, run the following command:
 ```
-poetry run gunicorn --chdir src -w 12 -b 0.0.0.0:8000 -k uvicorn.workers.UvicornWorker core.asgi:application
+poetry run uvicorn --app-dir=src core.asgi:application
 ```
 
 The browsable API will now be available in any web browser at http://localhost:8000/songs/. To view the songs individually, click on any `url` field's hyperlink to open the endpoint for that song, and go to `/lyrics` to view the relevant lyrics if they are stored on disk.
