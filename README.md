@@ -17,6 +17,9 @@ DJANGO_SUPERUSER_PASSWORD=dev_interview \
 DJANGO_SUPERUSER_EMAIL=admin@adm.in \
 poetry run src/manage.py createsuperuser --no-input
 ```
+```
+poetry run src/manage.py import_songs data/task_data.csv
+```
 
 And to run the server locally, run the following command:
 ```
